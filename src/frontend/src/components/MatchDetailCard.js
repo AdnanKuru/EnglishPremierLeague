@@ -10,7 +10,7 @@ export const MatchDetailCard = ({teamName,match}) => {
             <h3>Latest Matches</h3>
             <h1>vs <Link to= {otherTeamRoute}>{otherTeam}</Link></h1>
             <h2>{match.date}</h2>
-            <h3>{match.matchWinner } won by </h3>
+            <h3>{match.matchWinner } won </h3>
         </div>
     );
 }
