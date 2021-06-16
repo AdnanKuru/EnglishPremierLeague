@@ -12,13 +12,13 @@ export const TeamPage = () => {
 
     useEffect(
         () => {
-            const fetchMatches = async () => {
+            const fetchTeam = async () => {
                 const response = await fetch(`http://localhost:8080/team/${teamName}`);
                 const data = await response.json();
                 console.log(data);
                 setTeam(data);
             };
-            fetchMatches();
+            fetchTeam();
         }, [teamName]
     );
 
@@ -31,12 +31,14 @@ export const TeamPage = () => {
             <div className="team-name-section">
                 <h1 className="team-name">{team.teamName}</h1>
             </div>
-            <div className="win-loss-section">
-                Wins / Losses
+            <div className="win-loss-draw-section">
+                Wins / Losses / Draws
+
                 <PieChart
                 data={[
-                    { title: 'Losses', value: team.totalMatches - team.totalWins, color: '#a34d5d'},
+                    { title: 'Losses', value: team.totalLosses, color: '#a34d5d'},
                     { title: 'Wins', value: team.totalWins, color: '#4da375'},
+                    { title: 'Draws', value: team.totalMatches - (team.totalWins + team.totalLosses), color: '#979797'},
 
             ]}
                 />;
@@ -49,7 +51,7 @@ export const TeamPage = () => {
             </div>
             {team.matches.slice(1).map(match => <MatchSmallCard teamName = {team.teamName} match={match}/>)}
             <div className="more-link">
-            <Link to="/"> More > </Link>
+                <Link to={`/teams/${teamName}/matches/${process.env.REACT_APP_DATA_END_YEAR}`}> More ></Link>
             </div>
         </div>
     );

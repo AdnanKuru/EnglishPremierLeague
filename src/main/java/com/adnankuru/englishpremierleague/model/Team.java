@@ -17,6 +17,7 @@ public class Team {
     private String  teamName;
     private long totalMatches;
     private long totalWins;
+    private long totalLosses;
 
     @Transient
     private List<Match> matches;
@@ -32,6 +33,7 @@ public class Team {
                 "teamName='" + teamName + '\'' +
                 ", totalMatches=" + totalMatches +
                 ", totalWins=" + totalWins +
+                ", totalWins=" + totalLosses +
                 '}';
     }
 }

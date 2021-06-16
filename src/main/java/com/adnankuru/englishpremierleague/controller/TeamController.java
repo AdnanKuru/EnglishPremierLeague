@@ -4,7 +4,6 @@
     import com.adnankuru.englishpremierleague.model.Team;
     import com.adnankuru.englishpremierleague.repository.MatchRepository;
     import com.adnankuru.englishpremierleague.repository.TeamRepository;
-    import org.apache.tomcat.jni.Local;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.data.domain.PageRequest;
     import org.springframework.data.domain.Pageable;
@@ -25,6 +24,11 @@
         public TeamController(TeamRepository teamRepository,MatchRepository matchRepository){
             this.teamRepository = teamRepository;
             this.matchRepository = matchRepository;
+        }
+
+        @GetMapping("/team")
+        public Iterable<Team> getAllTeam(){
+            return this.teamRepository.findAll();
         }
 
         @GetMapping("/team/{teamName}")

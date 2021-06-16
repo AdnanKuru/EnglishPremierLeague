@@ -57,6 +57,14 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
                         if(team != null) {team.setTotalWins((long) e[1]);}
                     });
 
+            entityManager.createQuery("select m.matchLoser, count(*) from Match m group by m.matchLoser",Object[].class)
+                    .getResultList()
+                    .stream()
+                    .forEach(e -> {
+                        Team team = teamData.get((String) e[0]);
+                        if(team != null) {team.setTotalLosses((long) e[1]);}
+                    });
+
             teamData.values().forEach(entityManager::persist);
 
 
